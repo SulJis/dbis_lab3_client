@@ -118,13 +118,13 @@
                     this.setUser(res);
                     this.setLabels(res);
                     this.loaded = true;
+                    bus.$on("filter-by-label", this.filterByLabel);
+                    bus.$on("clear-filters", this.clearFilters);
                 })
                 .catch(err => {
                     console.log(err);
-                    this.$router.push("/login");
+                    // this.$router.push("/login");
                 });
-            bus.$on("filter-by-label", this.filterByLabel);
-            bus.$on("clear-filters", this.clearFilters);
         }
     }
 </script>
