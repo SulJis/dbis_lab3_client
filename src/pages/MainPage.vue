@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <OutlineButton color="red" text="Logout" class="logout" v-if="user" v-on:click.native="logout"/>
         <LabelSection v-bind:labels="labels"/>
         <div class="list-container">
             <div class="list-creator-sec">
@@ -28,10 +29,11 @@
     import bus from "@/bus";
     import getToken from "@/utils/routine";
     import ListShimmer from "@/components/ListShimmer";
+    import OutlineButton from "../components/OutlineButton";
 
     export default {
         name: "MainPage",
-        components: {ListShimmer, LabelSection, ListCreator, List},
+        components: {OutlineButton, ListShimmer, LabelSection, ListCreator, List},
         data(){
             return {
                 user: null,
@@ -95,6 +97,11 @@
                     headers: getToken()
                 });
                 this.lists = listsRes.data.lists;
+            },
+
+            logout(){
+                localStorage["jwt-token"] = null;
+                this.$router.push("/login")
             }
         },
 
@@ -145,5 +152,11 @@
 
     .list-container{
         width: 100%;
+    }
+
+    .logout{
+        position: absolute;
+        top: 20px;
+        right: 20px;
     }
 </style>

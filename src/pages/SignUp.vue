@@ -68,7 +68,7 @@
         },
         methods: {
             validateData(){
-              if(this.formData.name && this.formData.email && this.formData.password && this.formData.date && this.formData.sex){
+              if(this.formData.email && this.formData.password){
                   return true;
               }
             },
@@ -85,7 +85,7 @@
                     axios.post(`${process.env.VUE_APP_SERVER_URL}/signup`, userData)
                         .then(response => {
                             console.log(response.data.email);
-                            if(response.status == "success") {
+                            if(response.status === 200) {
                                 this.$router.push("/");
                             }
                         });
