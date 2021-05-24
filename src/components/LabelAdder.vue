@@ -45,7 +45,7 @@
             }
         },
         mounted(){
-            axios.get("http://localhost:5000/api/get/labels", {
+            axios.get(`${process.env.VUE_APP_SERVER_URL}/api/get/labels`, {
                 headers: getToken()
             }).then(res => {
                 if (res.status === 200){

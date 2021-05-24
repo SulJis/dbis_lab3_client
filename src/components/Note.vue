@@ -60,7 +60,7 @@
         methods: {
             textBlur(e){
                 this.noteParams.text = e.target.textContent.trim();
-                axios.put(`http://localhost:5000/api/update/note/${this.noteId}`, {
+                axios.put(`${process.env.VUE_APP_SERVER_URL}/api/update/note/${this.noteId}`, {
                     text: this.noteParams.text
                 }, {
                     headers: getToken()
@@ -68,7 +68,7 @@
             },
 
             updateChecked(){
-                axios.put(`http://localhost:5000/api/update/note/${this.noteId}`, {
+                axios.put(`${process.env.VUE_APP_SERVER_URL}/api/update/note/${this.noteId}`, {
                     checked: this.noteParams.checked
                 }, {
                     headers: getToken()
@@ -76,7 +76,7 @@
             },
 
             updateDeadline(){
-                axios.put(`http://localhost:5000/api/update/note/${this.noteId}`, {
+                axios.put(`${process.env.VUE_APP_SERVER_URL}/api/update/note/${this.noteId}`, {
                     deadline: this.noteParams.deadline
                 }, {
                     headers: getToken()
@@ -89,7 +89,7 @@
         },
 
         mounted(){
-            axios.get(`http://localhost:5000/api/get/note/${this.noteId}`, {
+            axios.get(`${process.env.VUE_APP_SERVER_URL}/api/get/note/${this.noteId}`, {
                 headers: getToken()
             }).then(res => {
                 if (res.status === 200){

@@ -82,7 +82,7 @@
                         sex: this.formData.sex,
                         date: this.formData.date
                     };
-                    axios.post("http://localhost:5000/signup", userData)
+                    axios.post(`${process.env.VUE_APP_SERVER_URL}/signup`, userData)
                         .then(response => {
                             console.log(response.data.email);
                             if(response.status == "success") {

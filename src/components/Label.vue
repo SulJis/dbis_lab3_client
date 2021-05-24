@@ -87,7 +87,7 @@
                     text: this.text,
                     color: this.color
                 }
-                axios.put(`http://localhost:5000/api/update/label/${this.id}`, data, {
+                axios.put(`${process.env.VUE_APP_SERVER_URL}/api/update/label/${this.id}`, data, {
                     headers: getToken()
                 }).then(res => {
                     if (res.status === 200) {
@@ -103,7 +103,7 @@
             },
         },
         mounted(){
-            axios.get(`http://localhost:5000/api/get/label/${this.id}`, {
+            axios.get(`${process.env.VUE_APP_SERVER_URL}/api/get/label/${this.id}`, {
                 headers: getToken()
             }).then(res => {
                 if (res.status === 200){

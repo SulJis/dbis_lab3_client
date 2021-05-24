@@ -59,7 +59,7 @@
 
             async createList(listData){
                 this.fetchingNewList = true;
-                const res = await axios.post("http://localhost:5000/api/create/list", listData, {
+                const res = await axios.post(`${process.env.VUE_APP_SERVER_URL}/api/create/list`, listData, {
                     headers: getToken()
                 });
                 if (res.status === 200) {
@@ -70,7 +70,7 @@
             },
 
             async deleteList(listId){
-                const res = await axios.delete(`http://localhost:5000/api/delete/list/${listId}`, {
+                const res = await axios.delete(`${process.env.VUE_APP_SERVER_URL}/api/delete/list/${listId}`, {
                     headers: getToken()
                 });
                 if (res.status === 200) {
@@ -82,7 +82,7 @@
 
 
             async filterByLabel(labelId){
-                const res = await axios.get(`http://localhost:5000/api/get/lists/by-label/${labelId}`, {
+                const res = await axios.get(`${process.env.VUE_APP_SERVER_URL}/api/get/lists/by-label/${labelId}`, {
                     headers: getToken()
                 });
                 if (res.status === 200){
@@ -91,7 +91,7 @@
             },
 
             async clearFilters(){
-                const listsRes = await axios.get("http://localhost:5000/api/get/lists", {
+                const listsRes = await axios.get(`${process.env.VUE_APP_SERVER_URL}/api/get/lists`, {
                     headers: getToken()
                 });
                 this.lists = listsRes.data.lists;
@@ -99,7 +99,7 @@
         },
 
         created(){
-            axios.get("http://localhost:5000/api/get_user", {
+            axios.get(`${process.env.VUE_APP_SERVER_URL}/api/get_user`, {
                 headers: getToken()
             })
             .then(res => {

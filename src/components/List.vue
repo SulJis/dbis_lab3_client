@@ -87,7 +87,7 @@
             createNote(noteData){
                 this.creatingNewNote = false;
                 this.fetchingNewNote = true;
-                axios.post("http://localhost:5000/api/create/note", noteData, {
+                axios.post(`${process.env.VUE_APP_SERVER_URL}/api/create/note`, noteData, {
                     headers: getToken()
                 }).then(res => {
                     if (res.status === 200){
@@ -99,7 +99,7 @@
             },
 
             deleteNote(noteId){
-                axios.delete(`http://localhost:5000/api/delete/note/${noteId}`, {
+                axios.delete(`${process.env.VUE_APP_SERVER_URL}/api/delete/note/${noteId}`, {
                     headers: getToken()
                 }).then(res => {
                     if (res.status === 200){
@@ -113,7 +113,7 @@
             updateTitle(e){
                 this.listTitle = e.target.textContent.trim();
                 console.log(this.listTitle);
-                axios.put(`http://localhost:5000/api/update/list/${this.id}`, {
+                axios.put(`${process.env.VUE_APP_SERVER_URL}/api/update/list/${this.id}`, {
                     title: this.listTitle
                 }, {
                     headers: getToken()
@@ -124,7 +124,7 @@
                 this.addingLabel = false;
                 this.fetchingNewLabel = true;
                 axios.put(
-                `http://localhost:5000/api/update/list/${labelData.listId}/add-label/${labelData.labelId}`,
+                `${process.env.VUE_APP_SERVER_URL}/api/update/list/${labelData.listId}/add-label/${labelData.labelId}`,
                 {}, {
                     headers: getToken()
                 }).then(res => {
@@ -136,7 +136,7 @@
             },
 
             unpinLabel(data){
-                axios.put(`http://localhost:5000/api/update/list/${data.listId}/unpin/${data.labelId}`,
+                axios.put(`${process.env.VUE_APP_SERVER_URL}/api/update/list/${data.listId}/unpin/${data.labelId}`,
                 {}, {
                     headers: getToken()
                 }).then(res => {
@@ -164,7 +164,7 @@
         },
 
         mounted(){
-            axios.get(`http://localhost:5000/api/get/list/${this.id}`, {
+            axios.get(`${process.env.VUE_APP_SERVER_URL}/api/get/list/${this.id}`, {
                 headers: getToken()
             }).then(res => {
                 if (res.status === 200){

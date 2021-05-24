@@ -36,7 +36,7 @@
             createLabel(labelData){
                 this.fetchingNewLabel = true;
                 this.creatingNewLabel = false;
-                axios.post("http://localhost:5000/api/create/label", labelData, {
+                axios.post(`${process.env.VUE_APP_SERVER_URL}/api/create/label`, labelData, {
                     headers: getToken()
                 }).then(res => {
                     if (res.status === 200){
@@ -47,7 +47,7 @@
             },
 
             deleteLabel(labelId){
-                axios.delete(`http://localhost:5000/api/delete/label/${labelId}`, {
+                axios.delete(`${process.env.VUE_APP_SERVER_URL}/api/delete/label/${labelId}`, {
                     headers: getToken()
                 }).then( res => {
                     if (res.status === 200){
@@ -65,7 +65,7 @@
         },
 
         mounted() {
-            axios.get("http://localhost:5000/api/get/labels", {
+            axios.get(`${process.env.VUE_APP_SERVER_URL}/api/get/labels`, {
                 headers: getToken()
             }).then(res => {
                 if (res.status === 200){

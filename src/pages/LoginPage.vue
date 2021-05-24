@@ -59,10 +59,11 @@
             },
 
             sendUserData(e){
+                console.log(process.env);
                 e.preventDefault();
                 if(this.validateData()){
                     const userData = this.formData;
-                    axios.post("http://localhost:5000/login", userData)
+                    axios.post(`${process.env.VUE_APP_SERVER_URL}/login`, userData)
                     .then(response => {
                             console.log(response.data);
                             if(response.data.status == "success") {
