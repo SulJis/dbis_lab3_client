@@ -49,7 +49,7 @@
     .card{
         min-width: 400px;
         padding: 0;
-        /*max-width: 600px;*/
+        max-width: 600px;
     }
     .list-title{
         margin-bottom: 16px;
