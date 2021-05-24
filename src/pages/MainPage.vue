@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" v-if="loaded">
         <OutlineButton color="red" text="Logout" class="logout" v-if="user" v-on:click.native="logout"/>
         <LabelSection v-bind:labels="labels"/>
         <div class="list-container">
@@ -18,6 +18,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="spinner-border text-secondary" role="status" v-else>
+        <span class="visually-hidden">Loading...</span>
     </div>
 </template>
 
@@ -39,7 +42,8 @@
                 user: null,
                 lists: null,
                 labels: null,
-                fetchingNewList: false
+                fetchingNewList: false,
+                loaded: false
             }
         },
 
@@ -105,22 +109,20 @@
                 this.$router.push("/login")
             }
         },
-
-        created(){
+        mounted(){
             axios.get(`${process.env.VUE_APP_SERVER_URL}/api/get_user`, {
                 headers: getToken()
             })
-            .then(res => {
-                this.setLists(res);
-                this.setUser(res);
-                this.setLabels(res);
-            })
-            .catch(err => {
-                console.log(err);
-                this.$router.push("/login");
-            });
-        },
-        mounted(){
+                .then(res => {
+                    this.setLists(res);
+                    this.setUser(res);
+                    this.setLabels(res);
+                    this.loaded = true;
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.$router.push("/login");
+                });
             bus.$on("filter-by-label", this.filterByLabel);
             bus.$on("clear-filters", this.clearFilters);
         }
@@ -159,5 +161,11 @@
         position: absolute;
         top: 20px;
         right: 20px;
+    }
+
+    .spinner-border{
+        position: absolute;
+        top: 45%;
+        left: 50%;
     }
 </style>
