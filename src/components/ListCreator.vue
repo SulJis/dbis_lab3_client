@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex">
-        <FormInputText placeholder="List title..."
+        <FormInputText placeholder="New list..."
                        v-model="title"/>
         <OutlineButton text="New list"
                        color="blue"
