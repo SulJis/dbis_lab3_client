@@ -61,14 +61,15 @@
 
             async createList(listData){
                 this.fetchingNewList = true;
-                const res = await axios.post(`${process.env.VUE_APP_SERVER_URL}/api/create/list`, listData, {
+                await axios.post(`${process.env.VUE_APP_SERVER_URL}/api/create/list`, listData, {
                     headers: getToken()
-                });
+                }).then(res => {
                 if (res.status === 200) {
                     this.lists.unshift(res.data);
                     this.fetchingNewList = false;
-                }
-                this.fetchingNewList = false;
+                    }
+                }).catch(() => this.fetchingNewList = false);
+
             },
 
             async deleteList(listId){

@@ -181,7 +181,7 @@
 <style scoped>
     .card{
         min-width: 400px;
-        /*max-width: 600px;*/
+        max-width: 600px;
     }
     .button-container{
         padding: 16px;
